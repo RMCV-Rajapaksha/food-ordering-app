@@ -1,4 +1,3 @@
-// lib/meal_detail_page.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -86,6 +85,10 @@ class _MealDetailPageState extends State<MealDetailPage> {
                 children: [
                   Text(
                     'Ingredients',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 10),
                   ListView.builder(
@@ -102,6 +105,10 @@ class _MealDetailPageState extends State<MealDetailPage> {
                   SizedBox(height: 20),
                   Text(
                     'Instructions',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 10),
                   Text(

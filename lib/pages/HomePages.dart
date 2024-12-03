@@ -1,6 +1,6 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:food_ordering_app/pages/foodDescriptionPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:food_ordering_app/pages/SingIn.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -51,6 +51,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SignInPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +68,10 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: fetchRandomMeals,
+          ),
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: _logout,
           ),
         ],
       ),
@@ -98,13 +110,10 @@ class _HomePageState extends State<HomePage> {
                         title: Text(meal['strMeal']),
                         subtitle: Text(meal['strCategory'] ?? 'Unknown'),
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => MealDetailPage(
-                                mealId: meal['idMeal'],
-                              ),
-                            ),
+                            '/mealDetail',
+                            arguments: meal['idMeal'],
                           );
                         },
                       );
